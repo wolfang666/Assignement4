@@ -6,9 +6,9 @@ public class AliceClient {
 
 	public static void main(String[] args) {
 		
-		//if(args.length != 1){
-		//	System.exit(0);
-		//}
+		if(args.length != 1){
+			System.exit(0);
+		}
 		
 		
 		String userInput = "temp string";
