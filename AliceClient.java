@@ -9,13 +9,26 @@ public class AliceClient {
 		//if(args.length != 1){
 		//	System.exit(0);
 		//}
-		
+		//create a connection to server
+		Socket echoSocket = null;
+		try {
+			echoSocket = new Socket("localhost", 9000);
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		String userInput = "temp string";
-		String userGoodbye = "bye";		
+		String userGoodbye = "bye";	
+		String response = "myResponse";
+		String output = "temp";
+	
 		try {
-			//create a connection to server
-			Socket echoSocket = new Socket("localhost", 9000);
+			
+			
 			
 			//open a stream for writing characters to server
 			PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
@@ -28,6 +41,7 @@ public class AliceClient {
 			
 			
 			//read from command line
+			
 			while(userInput != userGoodbye){
 				userInput = stdIn.readLine();
 				
@@ -40,9 +54,25 @@ public class AliceClient {
 				//send user input to server (communicate with server)
 				out.println(userInput);
 				//read input from server and print
-				System.out.println(in.readLine());
+				
+				while((response = in.readLine()) != null){
+					
+					if(response.equals("ENDRESPONSE"))
+					{
+						
+						break;
+					}
+					System.out.println(response);
+					
+				}
+				
+					
+				
+
+				
 			}
-			echoSocket.close();
+		
+			
 				
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -55,8 +85,8 @@ public class AliceClient {
 			e.printStackTrace();
 		}
 		
+		
+	//end main
 
-	}//end main
-
-
+	}
 }

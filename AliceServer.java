@@ -7,6 +7,9 @@ public class AliceServer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		GetResponse myResponse = new GetResponse();
+		
+		
 		//create a server on port 9000
 		ServerSocket serverSocket = null;
 		try {
@@ -40,7 +43,12 @@ public class AliceServer {
 					
 					//while there is input from client, send it back to client
 					while ((inputLine = in.readLine()) != null) {
-						out.println(inputLine);
+						
+						
+						out.println(myResponse.respond(inputLine));
+						
+						
+						out.println("ENDRESPONSE");
 					}
 					
 					
@@ -59,3 +67,4 @@ public class AliceServer {
 	
 
 }
+
